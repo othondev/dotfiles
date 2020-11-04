@@ -1,0 +1,1 @@
+alias ec2="aws ec2 describe-instances --query 'Reservations[*].Instances[*].{name: Tags[?Key==\`Name\`] | [0].Value, instance_id: InstanceId, public_ip: PublicIpAddress, private_ip: PrivateIpAddress, state: State.Name}' --output table"

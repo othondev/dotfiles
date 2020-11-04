@@ -1,0 +1,4 @@
+Copy-Paste Problems:
+  - Create configuration to two tmux( remote and local ).
+    - Remote: should has all plugings and mappings but no tmux-yank, copy-cat and tmux-open.
+    - Local: should unmapping shourcut except tmux-yank, copy-cat and tmux-open with the same bind-key.
