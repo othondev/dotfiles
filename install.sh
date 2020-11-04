@@ -29,6 +29,7 @@ function createLink {
 install \
   autojump \
   curl \
+  fzf \
   gawk \
   git \
   jq \
