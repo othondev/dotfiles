@@ -15,13 +15,14 @@ function install {
 }
 
 function createLink {
+  rm -rf $2
   case "$(uname -s)" in
     Darwin)
-      ln -sfn $1 $2
+      ln -s $1 $2
       ;;
 
     Linux)
-      ln -sTf $1 $2
+      ln -s $1 $2
       ;;
   esac
 }
@@ -41,6 +42,7 @@ install \
 
 createLink $HOME/.dotfiles/tmux.conf ~/.tmux.conf
 createLink $HOME/.dotfiles/zshrc ~/.zshrc
+createLink $HOME/.dotfiles/zsh ~/.zsh
 createLink $HOME/.dotfiles/vimrc ~/.vimrc
 createLink $HOME/.dotfiles/vimrc ~/.config/nvim/init.vim
 

@@ -34,6 +34,8 @@ export ZSH=$HOME/.zsh/plugins/oh-my-zsh
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
+export VISUAL=nvim
+export EDITOR=$VISUAL
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
@@ -43,7 +45,6 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
 export FZF_BASE=/tmp/fzf
-alias editor=vim
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
