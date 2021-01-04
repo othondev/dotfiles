@@ -47,6 +47,7 @@ setopt HIST_BEEP
 export FZF_BASE=/tmp/fzf
 autoload -U edit-command-line
 zle -N edit-command-line
+bindkey -e
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 if [ -z "$TMUX" ]
