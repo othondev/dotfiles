@@ -69,32 +69,36 @@ let g:netrw_winsize = 25
 "                                                                     Mappings
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <C-c> <ESC>
 let mapleader = " "
 nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> <C-P> :GFiles <CR>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gy <Plug>(coc-type-definition)
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
 nnoremap <Leader>pf :Files<CR>
-nmap <silent> <C-P> :GFiles <CR>
 nnoremap <leader>Y "+Y
 nnoremap <leader>af :CocFix <CR>
 nnoremap <leader>ap :Prettier <CR>
+nnoremap <leader>gh :diffget //3<CR>
 nnoremap <leader>gl :GcLog <CR>
 nnoremap <leader>gs :G <CR>
-nnoremap <leader>gh :diffget //3<CR>
 nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>pv :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeShow <CR>
+nnoremap <leader>x :bd<CR>
 nnoremap <leader>y "+y
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 nnoremap <silent> <leader>f :Ggrep! "\<<cword>\>" <CR>:copen<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-inoremap <C-c> <ESC>
-nnoremap <leader>x :bd<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Snippet
