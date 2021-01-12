@@ -30,6 +30,7 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set undodir=/tmp//
 set undofile
 set updatetime=300
+set scrolloff=8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Plugins
@@ -50,6 +51,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'townk/vim-autoclose'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -106,6 +108,7 @@ vnoremap K :m '<-2<CR>gv=gv
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F2> oconsole.log()<ESC>F(a
+nnoremap <F3> :e $MYVIMRC<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   Appearance
