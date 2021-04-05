@@ -40,11 +40,15 @@ install \
   vim \
   zsh
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 createLink $HOME/.dotfiles/tmux.conf ~/.tmux.conf
 createLink $HOME/.dotfiles/zshrc ~/.zshrc
 createLink $HOME/.dotfiles/zsh ~/.zsh
 createLink $HOME/.dotfiles/vimrc ~/.vimrc
 createLink $HOME/.dotfiles/vimrc ~/.config/nvim/init.vim
+createLink $HOME/.vim/autoload/plug.vim ${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim
 
 [ -d "$HOME/.dotfiles" ] || git clone https://gitlab.com/othondev/dotfiles.git $HOME/.dotfiles
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm

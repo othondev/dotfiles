@@ -50,12 +50,11 @@ zle -N edit-command-line
 bindkey -e
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
-if [ -z "$TMUX" ]
-then
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   tmux attach -t TMUX || tmux new -s TMUX
+  [[ $? -gt 0 && -z "$TMUX" ]] && tmux
+  tmux a &> /dev/null
 fi
-[[ $? -gt 0 && -z "$TMUX" ]] && tmux
-tmux a &> /dev/null
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ################################################################################
