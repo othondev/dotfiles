@@ -52,8 +52,6 @@ bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   tmux attach -t TMUX || tmux new -s TMUX
-  [[ $? -gt 0 && -z "$TMUX" ]] && tmux
-  tmux a &> /dev/null
 fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
