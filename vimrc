@@ -136,6 +136,6 @@ let g:airline#extensions#tabline#tabs_label = 'T'
 let g:airline#extensions#branch#format = 2
 let g:airline_section_z = airline#section#create(['windowswap'])
 let g:airline_theme='onedark'
-let g:startify_custom_header = systemlist('task list')
+let g:startify_custom_header = systemlist('gh issue list')
 colorscheme onedark
 
