@@ -11,6 +11,7 @@ endfun
 autocmd BufWritePre * :call TrimWhitespace()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType * syntax sync fromstart
+set autoread
 set backupdir=/tmp//
 set cursorline
 set directory=/tmp//
