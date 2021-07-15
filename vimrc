@@ -39,6 +39,8 @@ set scrolloff=8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
+Plug 'ap/vim-css-color'
+Plug 'codota/tabnine-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -95,7 +97,8 @@ nnoremap <leader>gs :G <CR>
 nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>pv :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeShow <CR>
-nnoremap <leader>x :bd<CR>
+nnoremap <leader>x :bd <CR>
+nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
 nnoremap <leader>y "+y
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
