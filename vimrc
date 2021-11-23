@@ -40,7 +40,6 @@ set scrolloff=8
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color'
-Plug 'codota/tabnine-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -48,6 +47,11 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'github/copilot.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'scrooloose/nerdtree'
 Plug 'townk/vim-autoclose'
 Plug 'tpope/vim-fugitive'
@@ -64,11 +68,16 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 let NERDTreeQuitOnOpen=1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:netrw_banner = 0
 let g:netrw_browse_split = 2
 let g:netrw_winsize = 25
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Custom
+"                                                                     Commands
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! -nargs=0 Wa :wa
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Mappings
@@ -77,7 +86,8 @@ let g:netrw_winsize = 25
 inoremap <C-c> <ESC>
 let mapleader = " "
 nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> <C-P> :GFiles <CR>
+nmap <silent> <C-P> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
+nmap <leader>aa :CocAction <CR>
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
@@ -89,8 +99,9 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 nnoremap <Leader>pf :Files<CR>
 nnoremap <leader>Y "+Y
+nnoremap <leader>P "+P
 nnoremap <leader>af :CocFix <CR>
-nnoremap <leader>ap :Prettier <CR>
+nnoremap <leader>ap :Prettier <CR> :wa<CR>
 nnoremap <leader>gh :diffget //3<CR>
 nnoremap <leader>gl :GcLog <CR>
 nnoremap <leader>gs :G <CR>
@@ -102,17 +113,19 @@ nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
 nnoremap <leader>y "+y
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <silent> <leader>f :Ggrep! "\<<cword>\>" <CR>:copen<CR>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>? <cmd>Telescope help_tags<cr>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+vnoremap <leader>aa :CocAction <CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Snippet
 "                                                                       Codes
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <F2> oconsole.log()<ESC>F(a
-nnoremap <F3> :e $MYVIMRC<CR>
+nnoremap <leader>2 oconsole.log()<ESC>F(a
+nnoremap <leader>3 :e $MYVIMRC<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   Appearance

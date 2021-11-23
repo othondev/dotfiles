@@ -35,6 +35,7 @@ install \
   git \
   jq \
   npm \
+  ripgrep \
   taskwarrior \
   tmux \
   vim \

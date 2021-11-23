@@ -3,6 +3,8 @@
 #
 ################################################################################
 source ~/.zplug/init.zsh
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug MichaelAquilina/zsh-auto-notify
 zplug Valodim/zsh-curl-completion
 zplug cpitt/zsh-dotenv, as:plugin
 zplug jimeh/zsh-peco-history, defer:2
@@ -10,7 +12,6 @@ zplug plugins/autojump, from:oh-my-zsh
 zplug plugins/fzf, from:oh-my-zsh
 zplug plugins/git, from:oh-my-zsh
 zplug plugins/gitfast, from:oh-my-zsh
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug zsh-users/zsh-autosuggestions
 zplug zsh-users/zsh-completions
 zplug zsh-users/zsh-syntax-highlighting, defer:2
@@ -72,6 +73,13 @@ do
 done
 
 alias tmux="TERM=screen-256color-bce tmux"
+alias gb="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/othon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/othon/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/othon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/othon/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
