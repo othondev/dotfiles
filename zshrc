@@ -73,7 +73,7 @@ do
 done
 
 alias tmux="TERM=screen-256color-bce tmux"
-alias gb="git for-each-ref --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
+alias gb="git for-each-ref --count=10 --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -83,3 +83,7 @@ if [ -f '/home/othon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/o
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/othon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/othon/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

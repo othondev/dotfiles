@@ -38,8 +38,9 @@ set scrolloff=8
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
+Plug 'APZelos/blamer.nvim'
 Plug 'airblade/vim-gitgutter'
-Plug 'ap/vim-css-color'
+Plug 'github/copilot.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -50,7 +51,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'github/copilot.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'scrooloose/nerdtree'
 Plug 'townk/vim-autoclose'
@@ -71,6 +71,9 @@ let NERDTreeQuitOnOpen=1
 let g:netrw_banner = 0
 let g:netrw_browse_split = 2
 let g:netrw_winsize = 25
+
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Custom
@@ -134,7 +137,6 @@ nnoremap <leader>3 :e $MYVIMRC<CR>
 syntax on
 set background=dark
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -154,5 +156,5 @@ let g:airline#extensions#branch#format = 2
 let g:airline_section_z = airline#section#create(['windowswap'])
 let g:airline_theme='onedark'
 let g:startify_custom_header = systemlist('gh issue list')
-colorscheme onedark
+colorscheme gruvbox
 
