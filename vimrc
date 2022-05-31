@@ -9,7 +9,6 @@ fun! TrimWhitespace()
   call winrestview(l:save)
 endfun
 autocmd BufWritePre * :call TrimWhitespace()
-autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType * syntax sync fromstart
 set autoread
 set backupdir=/tmp//
@@ -33,6 +32,28 @@ set undofile
 set updatetime=300
 set scrolloff=8
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Mappings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <C-c> <ESC>
+let mapleader = " "
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <leader>Y "+Y
+nnoremap <leader>P "+P
+nnoremap <leader>gh :diffget //3<CR>
+nnoremap <leader>gu :diffget //2<CR>
+nnoremap <leader>u :UndotreeShow <CR>
+nnoremap <leader>x :bd <CR>
+nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
+nnoremap <leader>y "+y
+nnoremap <silent> <Leader>+ :vertical resize +30<CR>
+nnoremap <silent> <Leader>- :vertical resize -30<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Plugins
 "
@@ -66,61 +87,85 @@ call plug#end()
 "                                                               Configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-let NERDTreeQuitOnOpen=1
-let g:netrw_banner = 0
-let g:netrw_browse_split = 2
-let g:netrw_winsize = 25
+function LoadCustomConfig(pluginName)
 
-let g:blamer_enabled = 1
-let g:blamer_delay = 500
+  if a:pluginName == 'vim-airline'
+    let g:airline#extensions#tabline#buffers_label = 'B'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    let g:airline#extensions#tabline#show_buffers = 1
+    let g:airline#extensions#tabline#show_close_button = 0
+    let g:airline#extensions#tabline#show_splits = 0
+    let g:airline#extensions#tabline#show_tab_nr = 0
+    let g:airline#extensions#tabline#show_tab_type = 0
+    let g:airline#extensions#tabline#show_tab_count = 0
+    let g:airline#extensions#tabline#tabs_label = 'T'
+    let g:airline#extensions#branch#format = 2
+    let g:airline_section_z = airline#section#create(['windowswap'])
+    let g:airline_theme = 'onedark'
+  endif
 
+  if a:pluginName == 'nerdtree'
+    let NERDTreeQuitOnOpen=1
+    let g:netrw_banner = 0
+    let g:netrw_browse_split = 2
+    let g:netrw_winsize = 25
+
+    nnoremap <leader>pv :NERDTreeToggle <CR>
+  endif
+
+  if a:pluginName == 'blamer'
+    let g:blamer_enabled = 1
+    let g:blamer_delay = 500
+  endif
+
+  if a:pluginName == 'coc'
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    vnoremap <leader>aa :CocAction <CR>
+    nmap <leader>aa :CocAction <CR>
+    nnoremap <leader>af :CocFix <CR>
+    nmap <leader>rn <Plug>(coc-rename)
+    nnoremap <leader>ap :Prettier <CR> :wa<CR>
+  endif
+
+  if a:pluginName == 'telescope'
+    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+    nnoremap <leader>? <cmd>Telescope help_tags<cr>
+    nmap <silent> <C-P> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
+  endif
+
+  if a:pluginName == 'vim-fugitive'
+    nnoremap <leader>gl :GcLog <CR>
+    nnoremap <leader>gs :G <CR>
+  endif
+
+  if a:pluginName == 'fzf'
+    nnoremap <Leader>pf :Files<CR>
+  endif
+
+  if a:pluginName == 'vim-startify'
+    let g:startify_custom_header = systemlist('gh issue list')
+  endif
+
+endfunction
+
+for [name, spec] in items(g:plugs)
+  let pluginName = split(name, '\.')[0]
+  call LoadCustomConfig(pluginName)
+endfor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Custom
 "                                                                     Commands
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! -nargs=0 Wa :wa
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Mappings
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap <C-c> <ESC>
-let mapleader = " "
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> <C-P> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
-nmap <leader>aa :CocAction <CR>
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
-nnoremap <C-H> <C-W>h
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
-nnoremap <Leader>pf :Files<CR>
-nnoremap <leader>Y "+Y
-nnoremap <leader>P "+P
-nnoremap <leader>af :CocFix <CR>
-nnoremap <leader>ap :Prettier <CR> :wa<CR>
-nnoremap <leader>gh :diffget //3<CR>
-nnoremap <leader>gl :GcLog <CR>
-nnoremap <leader>gs :G <CR>
-nnoremap <leader>gu :diffget //2<CR>
-nnoremap <leader>pv :NERDTreeToggle <CR>
-nnoremap <leader>u :UndotreeShow <CR>
-nnoremap <leader>x :bd <CR>
-nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
-nnoremap <leader>y "+y
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>? <cmd>Telescope help_tags<cr>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap <leader>aa :CocAction <CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Snippet
@@ -142,19 +187,4 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:airline#extensions#tabline#buffers_label = 'B'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_tab_count = 0
-let g:airline#extensions#tabline#tabs_label = 'T'
-let g:airline#extensions#branch#format = 2
-let g:airline_section_z = airline#section#create(['windowswap'])
-let g:airline_theme='onedark'
-let g:startify_custom_header = systemlist('gh issue list')
 colorscheme gruvbox
-
