@@ -49,7 +49,7 @@ nnoremap <leader>gh :diffget //3<CR>
 nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>x :bd <CR>
 nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
-nnoremap <leader>y "+y
+noremap <leader>y "+y
 nnoremap <silent> <Leader>+ :vertical resize +30<CR>
 nnoremap <silent> <Leader>- :vertical resize -30<CR>
 vnoremap J :m '>+1<CR>gv=gv
