@@ -33,6 +33,7 @@ set updatetime=300
 set scrolloff=8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     General
 "                                                                     Mappings
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -46,7 +47,6 @@ nnoremap <leader>Y "+Y
 nnoremap <leader>P "+P
 nnoremap <leader>gh :diffget //3<CR>
 nnoremap <leader>gu :diffget //2<CR>
-nnoremap <leader>u :UndotreeShow <CR>
 nnoremap <leader>x :bd <CR>
 nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
 nnoremap <leader>y "+y
@@ -88,6 +88,10 @@ call plug#end()
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function LoadCustomConfig(pluginName)
+
+  if a:pluginName == 'undotree'
+    nnoremap <leader>u :UndotreeShow <CR>
+  endif
 
   if a:pluginName == 'vim-airline'
     let g:airline#extensions#tabline#buffers_label = 'B'
