@@ -128,6 +128,14 @@ function LoadCustomConfig(pluginName)
     autocmd CursorHold * silent call CocActionAsync('highlight')
     command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
+    function! ShowDocumentation()
+      if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+      else
+        call feedkeys('K', 'in')
+      endif
+    endfunction
+
     nmap <silent> [g <Plug>(coc-diagnostic-prev)
     nmap <silent> ]g <Plug>(coc-diagnostic-next)
     nmap <silent> gd <Plug>(coc-definition)
@@ -137,7 +145,11 @@ function LoadCustomConfig(pluginName)
     nmap <leader>aa :CocAction <CR>
     nnoremap <leader>af :CocFix <CR>
     nmap <leader>rn <Plug>(coc-rename)
+    nmap <leader>qf  <Plug>(coc-fix-current)
+    nnoremap <silent> K :call ShowDocumentation()<CR>
     nnoremap <leader>ap :Prettier <CR> :wa<CR>
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
   endif
 
   if a:pluginName == 'telescope'
