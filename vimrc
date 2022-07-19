@@ -153,18 +153,23 @@ function LoadCustomConfig(pluginName)
   endif
 
   if a:pluginName == 'telescope'
+    nnoremap <leader>ff <cmd>Telescope find_files<cr>
     nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-    nnoremap <leader>? <cmd>Telescope help_tags<cr>
-    nmap <silent> <C-P> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<cr>
+    nnoremap <leader>f? <cmd>Telescope help_tags<cr>
   endif
 
   if a:pluginName == 'vim-fugitive'
     nnoremap <leader>gl :GcLog <CR>
     nnoremap <leader>gs :G <CR>
+    nnoremap <leader>gb :Git blame <CR>
+    nnoremap <leader>gd :Gvdiffsplit <CR>
+    nnoremap <leader>ss :silent execute "grep -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
   endif
 
   if a:pluginName == 'fzf'
     nnoremap <Leader>pf :Files<CR>
+    nnoremap <TAB>w :Windows<CR>
+    nnoremap <TAB>b :Buffers<CR>
   endif
 
   if a:pluginName == 'vim-startify'
