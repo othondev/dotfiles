@@ -115,6 +115,7 @@ function LoadCustomConfig(pluginName)
     let g:netrw_banner = 0
     let g:netrw_browse_split = 2
     let g:netrw_winsize = 25
+    let g:NERDTreeWinPos = "right"
 
     nnoremap <leader>pv :NERDTreeToggle <CR>
   endif
@@ -154,12 +155,12 @@ function LoadCustomConfig(pluginName)
 
   if a:pluginName == 'telescope'
     nnoremap <leader>ff <cmd>Telescope find_files<cr>
-    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+    nnoremap <leader>fg :execute 'Telescope live_grep default_text=' . "" . expand('<cword>')<cr>
     nnoremap <leader>f? <cmd>Telescope help_tags<cr>
   endif
 
   if a:pluginName == 'vim-fugitive'
-    nnoremap <leader>gl :GcLog <CR>
+    nnoremap <leader>gl :Git log --oneline <CR>
     nnoremap <leader>gs :G <CR>
     nnoremap <leader>gb :Git blame <CR>
     nnoremap <leader>gd :Gvdiffsplit <CR>
@@ -167,6 +168,18 @@ function LoadCustomConfig(pluginName)
   endif
 
   if a:pluginName == 'fzf'
+    " Mapping selecting mappings
+    nmap <leader><tab> <plug>(fzf-maps-n)
+    xmap <leader><tab> <plug>(fzf-maps-x)
+    omap <leader><tab> <plug>(fzf-maps-o)
+    " Insert mode completion
+    imap <c-x><c-k> <plug>(fzf-complete-word)
+    imap <c-x><c-f> <plug>(fzf-complete-path)
+    imap <c-x><c-l> <plug>(fzf-complete-line)
+    nnoremap <Leader>fL :Lines<CR>
+    nnoremap <Leader>fl :BLines<CR>
+    nnoremap <Leader>fc :BCommits<CR>
+    nnoremap <Leader>fC :Commits<CR>
     nnoremap <Leader>pf :Files<CR>
     nnoremap <TAB>w :Windows<CR>
     nnoremap <TAB>b :Buffers<CR>
