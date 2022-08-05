@@ -4,9 +4,11 @@
 ################################################################################
 source ~/.zplug/init.zsh
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug Aloxaf/fzf-tab
 zplug MichaelAquilina/zsh-auto-notify
 zplug Valodim/zsh-curl-completion
 zplug cpitt/zsh-dotenv, as:plugin
+zplug hschne/fzf-git
 zplug jimeh/zsh-peco-history, defer:2
 zplug plugins/autojump, from:oh-my-zsh
 zplug plugins/fzf, from:oh-my-zsh
