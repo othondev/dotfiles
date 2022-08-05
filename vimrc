@@ -117,7 +117,8 @@ function LoadCustomConfig(pluginName)
     let g:netrw_winsize = 25
     let g:NERDTreeWinPos = "right"
 
-    nnoremap <leader>pv :NERDTreeToggle <CR>
+    nnoremap <leader>nn :NERDTreeToggle <CR>
+    nnoremap <leader>nf :NERDTreeFind <CR>
   endif
 
   if a:pluginName == 'blamer'
@@ -155,7 +156,7 @@ function LoadCustomConfig(pluginName)
 
   if a:pluginName == 'telescope'
     nnoremap <leader>ff <cmd>Telescope find_files<cr>
-    nnoremap <leader>fg :execute 'Telescope live_grep default_text=' . "" . expand('<cword>')<cr>
+    nnoremap <leader>fw :execute 'Telescope live_grep default_text=' . "" . expand('<cword>')<cr>
     nnoremap <leader>f? <cmd>Telescope help_tags<cr>
   endif
 
@@ -164,7 +165,6 @@ function LoadCustomConfig(pluginName)
     nnoremap <leader>gs :G <CR>
     nnoremap <leader>gb :Git blame <CR>
     nnoremap <leader>gd :Gvdiffsplit <CR>
-    nnoremap <leader>ss :silent execute "grep -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
   endif
 
   if a:pluginName == 'fzf'
