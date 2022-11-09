@@ -7,6 +7,8 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 install \
   nvim
 
+[ -d $HOME/.config/nvim ] || mkdir $HOME/.config/nvim
+
 createLink $HOME/.dotfiles/vim/vimrc ~/.vimrc
 createLink $HOME/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
 createLink $HOME/.vim/autoload/plug.vim ${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim
