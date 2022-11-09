@@ -1,6 +1,6 @@
 # Install
 ```
-curl https://gitlab.com/othondev/dotfiles/-/raw/master/install.sh | bash
+curl https://gitlab.com/othondev/dotfiles/-/raw/master/install | bash
 ```
 # Uninstall
 ```

@@ -1,0 +1,12 @@
+#!/bin/bash -e
+source util/index
+
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+install \
+  nvim
+
+createLink $HOME/.dotfiles/vim/vimrc ~/.vimrc
+createLink $HOME/.dotfiles/vim/vimrc ~/.config/nvim/init.vim
+createLink $HOME/.vim/autoload/plug.vim ${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim
