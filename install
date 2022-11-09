@@ -1,0 +1,30 @@
+#!/bin/bash -e
+source util/index
+
+install \
+  curl \
+  gawk \
+  git
+
+[ -d "$HOME/.dotfiles" ] || git clone https://github.com/othondev/dotfiles.git $HOME/.dotfiles
+
+installers=$(find . -mindepth 2 -name install)
+
+for installer in $installers
+do
+  modules=(${installer//// })
+  module=${modules[1]}
+  printf "Installing $module\n"
+
+  bash $installer
+
+  if [[ $? -eq 0 ]]
+  then
+    printf "%s installed successfully\n" $module
+  fi
+
+  if [[ $? -eq 0 ]]
+  then
+    printf "All modules installed\n"
+  fi
+done

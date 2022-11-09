@@ -1,0 +1,19 @@
+#!/bin/bash -e
+source util/index
+
+install \
+  autojump \
+  fzf \
+  jq \
+  npm \
+  nvim \
+  ripgrep \
+  tmux \
+  zsh
+
+[ -d "$HOME/.zplug" ] || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+createLink $HOME/.dotfiles/zsh/zshrc ~/.zshrc
+createLink $HOME/.dotfiles/zsh ~/.zsh
+
+[ $(echo $SHELL) = '/bin/zsh' ] || chsh -s `which zsh`

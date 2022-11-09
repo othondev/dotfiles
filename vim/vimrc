@@ -123,7 +123,8 @@ function LoadCustomConfig(pluginName)
 
   if a:pluginName == 'blamer'
     let g:blamer_enabled = 1
-    let g:blamer_delay = 500
+    let g:blamer_delay = 1000
+    let g:blamer_relative_time = 1
   endif
 
   if a:pluginName == 'coc'

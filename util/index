@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function install {
+  for program in "$@"
+  do
+    if ! [ -x "$(command -v $program)" ]; then
+      echo "Error: $program is not installed."
+      [ -x "$(command -v pacman)" ] && sudo pacman --noconfirm -S $program
+      [ -x "$(command -v apt)" ] && sudo apt install -y $program
+      [ -x "$(command -v yum)" ] && sudo yum install -y $program
+      [ -x "$(command -v brew)" ] && brew install $program
+    fi
+  done
+}
+
+function createLink {
+  rm -rf $2
+  case "$(uname -s)" in
+    Darwin)
+      ln -s $1 $2
+      ;;
+
+    Linux)
+      ln -s $1 $2
+      ;;
+  esac
+}
+
