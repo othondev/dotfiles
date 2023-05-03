@@ -51,7 +51,7 @@ createLink $HOME/.dotfiles/vimrc ~/.vimrc
 createLink $HOME/.dotfiles/vimrc ~/.config/nvim/init.vim
 createLink $HOME/.vim/autoload/plug.vim ${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim
 
-[ -d "$HOME/.dotfiles" ] || git clone https://gitlab.com/othondev/dotfiles.git $HOME/.dotfiles
+[ -d "$HOME/.dotfiles" ] || git clone https://github.com/othondev/dotfiles.git $HOME/.dotfiles
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 [ -d "$HOME/.zplug" ] || curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
