@@ -2,7 +2,7 @@ name: Integration Test dotfile
 
 on:
   push:
-    branches: '*'
+    branches: '**/**'
 
 jobs:
   build:
