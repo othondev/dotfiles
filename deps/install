@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function update {
+  [ -x "$(command -v apt)" ] && sudo apt update
+  [ -x "$(command -v yum)" ] && sudo yum update
+  [ -x "$(command -v brew)" ] && brew update
+}
+
 function install {
   success=()
   errors=()
@@ -28,6 +34,8 @@ function install {
     exit 1
   fi
 }
+
+update
 
 install $(cat deps/list)
 
