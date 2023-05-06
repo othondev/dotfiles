@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function install {
+  success=()
+  errors=()
+  for program in "$@"
+  do
+    if ! [ -x "$(command -v $program)" ]; then
+      [ -x "$(command -v pacman)" ] && sudo pacman --noconfirm -S $program
+      [ -x "$(command -v apt)" ] && sudo apt install -y $program
+      [ -x "$(command -v yum)" ] && sudo yum install -y $program
+      [ -x "$(command -v brew)" ] && brew install $program
+      errors+=($program)
+    else
+      success+=($program)
+    fi
+  done
+
+  for program in ${success[@]}; do
+    echo -e "The $program is installed."
+  done
+
+  for program in ${errors[@]}; do
+    echo -e "\033[31mError: $program is not installed. \033[0m"
+  done
+
+  if [ ${#errors[@]} -gt 0 ]; then
+    exit 1
+  fi
+}
+
+install $(cat deps/list)
+
