@@ -1,18 +1,8 @@
 #!/bin/bash
-cd $HOME
 
-function install {
-  for program in "$@"
-  do
-    if ! [ -x "$(command -v $program)" ]; then
-      echo "Error: $program is not installed."
-      [ -x "$(command -v pacman)" ] && sudo pacman --noconfirm -S $program
-      [ -x "$(command -v apt)" ] && sudo apt install -y $program
-      [ -x "$(command -v yum)" ] && sudo yum install -y $program
-      [ -x "$(command -v brew)" ] && brew install $program
-    fi
-  done
-}
+bash deps/install
+
+cd $HOME
 
 function createLink {
   rm -rf $2
@@ -26,20 +16,6 @@ function createLink {
       ;;
   esac
 }
-
-install \
-  autojump \
-  curl \
-  fzf \
-  gawk \
-  git \
-  jq \
-  npm \
-  ripgrep \
-  taskwarrior \
-  tmux \
-  vim \
-  zsh
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

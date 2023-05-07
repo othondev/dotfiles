@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  os-deps-test:
+    build:
+      context: .
+      args:
+        base_image: ubuntu:latest
+    entrypoint: bash ./tests/os-dependencies.bash
