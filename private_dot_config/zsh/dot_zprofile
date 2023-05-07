@@ -1,0 +1,4 @@
+alias ovim='nvim -u $HOME/.config/nvim/ovim/vimrc'
+alias lvim='nvim -u $HOME/.config/nvim/lvim/init.lua'
+
+EDITOR=vi
