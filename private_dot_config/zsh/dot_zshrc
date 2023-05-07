@@ -37,8 +37,6 @@ export ZSH=$HOME/.zsh/plugins/oh-my-zsh
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
-export VISUAL=nvim
-export EDITOR=$VISUAL
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
@@ -65,17 +63,6 @@ fi
 ################################################################################
 ZSH_THEME="spaceship"
 
-################################################################################
-#                                                                     Mappings
-#
-################################################################################
-for a in $HOME/.zsh/aliases/*.sh
-do
-  source $a
-done
-
-alias tmux="TERM=screen-256color-bce tmux"
-alias gb="git for-each-ref --count=10 --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

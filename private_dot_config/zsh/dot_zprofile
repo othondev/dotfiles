@@ -1,4 +1,21 @@
+################################################################################
+#                                                                     General
+#                                                               Configuration
+#
+################################################################################
+export EDITOR=vi
+export VISUAL=nvim
+
+################################################################################
+#                                                                     Mappings
+#
+################################################################################
 alias ovim='nvim -u $HOME/.config/nvim/ovim/vimrc'
 alias lvim='nvim -u $HOME/.config/nvim/lvim/init.lua'
+alias tmux="TERM=screen-256color-bce tmux"
+alias gb="git for-each-ref --count=10 --sort=-committerdate refs/heads/ --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'"
 
-EDITOR=vi
+for a in $HOME/.config/zsh/aliases/*.sh
+do
+  source $a
+done
