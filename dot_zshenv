@@ -1,0 +1,2 @@
+. "$HOME/.cargo/env"
+ZDOTDIR=/home/othon/.config/zsh
