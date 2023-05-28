@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  os-deps-test:
+  test:
     build:
       context: .
       target: deps
       args:
-        base_image: ubuntu:latest
+        base_image: ${OS_BASE}
         user_name: docker
     entrypoint: ls deps/

@@ -1,4 +1,4 @@
-name: Integration Test dotfile
+name: Ubuntu
 
 on:
   push:
@@ -19,4 +19,6 @@ jobs:
           key: ${{ runner.os }}-docker-${{ hashFiles('**/Dockerfile') }}
 
       - name: Build Docker and Execute Tests
-        run: docker compose up --exit-code-from os-deps-test --build
+        run: docker compose up --build --exit-code-from test 
+        env:
+          OS_BASE: ubuntu-latest
