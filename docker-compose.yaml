@@ -6,6 +6,6 @@ services:
       context: .
       target: deps
       args:
-        base_image: ${OS_BASE}
+        base_image: "${OS_BASE:-ubuntu:latest}"
         user_name: docker
     entrypoint: ls deps/
