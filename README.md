@@ -1,8 +1,1 @@
-# Install
-```
-curl https://gitlab.com/othondev/dotfiles/-/raw/master/install.sh | bash
-```
-# Uninstall
-```
-curl https://gitlab.com/othondev/dotfiles/-/raw/master/remove.sh | bash
-```
+[![Ubuntu](https://github.com/othondev/dotfiles/actions/workflows/UbuntuTest.yml/badge.svg)](https://github.com/othondev/dotfiles/actions/workflows/UbuntuTest.yml)
