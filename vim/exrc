@@ -13,3 +13,7 @@ endif
 autocmd BufWritePre * :call TrimWhitespace()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType * syntax sync fromstart
+
+"vim-tpope: dispatch plugin setup
+autocmd FileType javascript let b:dispatch = 'node %'
+autocmd FileType typescript let b:dispatch = 'bun %'
