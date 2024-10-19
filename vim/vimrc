@@ -1,3 +1,5 @@
+source ~/.vim/exrc "TODO: Do we need source it? Looks not woring if not
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     General
 "                                                               Configuration
