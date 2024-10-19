@@ -81,6 +81,7 @@ nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>n :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeShow <CR>
 nnoremap <leader>y "+y
+nnoremap <leader>/ :Lines <CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 nnoremap <silent> <leader>f :Ggrep! "\<<cword>\>" <CR>:copen<CR>
