@@ -1,22 +1,17 @@
-name: vimrc-check
+name: CI Pipeline
 on:
   push:
     branches:
       - "*"
+  pull_request:
+    branches:
+      - "*"
 
 jobs:
-  check-vimrc:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: main
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Validate vimrc file
-        run: |
-          if vim -c 'source ~/vim/vimrc' +qall; then
-            echo "vimrc is valid!"
-          else
-            echo "vimrc has errors!"
-            exit 1
-          fi
-
+      - name: Run build script
+        run: echo "Running a build step"

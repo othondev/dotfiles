@@ -33,6 +33,8 @@ fun! TrimWhitespace()
   call winrestview(l:save)
 endfun
 
+autocmd BufRead,BufNewFile * if getline(1) =~ '^#!.*\b\(bash\|sh\)\>' | set filetype=sh | endif
+
 autocmd BufWritePre * :call TrimWhitespace()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType * syntax sync fromstart
@@ -153,4 +155,5 @@ let g:airline#extensions#branch#format = 2
 let g:airline_section_z = airline#section#create(['windowswap'])
 let g:airline_theme='onedark'
 colorscheme onedark
+
 
