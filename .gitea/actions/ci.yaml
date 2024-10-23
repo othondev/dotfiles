@@ -1,0 +1,22 @@
+name: vimrc-check
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  check-vimrc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Validate vimrc file
+        run: |
+          if vim -c 'source ~/vim/vimrc' +qall; then
+            echo "vimrc is valid!"
+          else
+            echo "vimrc has errors!"
+            exit 1
+          fi
+
