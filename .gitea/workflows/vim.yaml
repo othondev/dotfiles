@@ -1,0 +1,31 @@
+name: Test Vim Configuration
+on: [push]
+
+jobs:
+  test-vim-config:
+    runs-on: main
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Install Vim
+        run: |
+          apk add vim
+
+      - name: Check Vim Version
+        run: |
+          vim --version
+
+      - name: Copy Custom Vim Config
+        run: |
+          cp vim/vimrc ~/.vimrc  # Assuming .vimrc is in the repository
+
+      - name: Test Vim Configuration
+        run: |
+          vim -c 'qa!'  # Open and close Vim to ensure config is loaded
+
+      - name: Validate Vim Configuration (Lint)
+        run: |
+          if grep -q 'syntax on' ~/.vimrc; then echo "Syntax highlighting is enabled"; else echo "Syntax highlighting is not enabled"; fi
+

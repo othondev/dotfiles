@@ -96,7 +96,8 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gT <Plug>(coc-type-definition)
+nmap <silent> gI <Plug>(coc-implementation)
 nnoremap <Leader>pf :Files<CR>
 nmap <silent> <C-P> :GFiles <CR>
 nnoremap <leader>Y "+Y
@@ -112,7 +113,6 @@ nnoremap <leader>y "+y
 nnoremap <leader>/ :Lines <CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <silent> <leader>f :Ggrep! "\<<cword>\>" <CR>:copen<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-c> <ESC>

@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Validate .vimrc syntax
+        run: |
+          sudo apt-get update && sudo apt-get install -y vim
+          vim -Nu "$PWD/.vimrc" -c "q" || exit 1
