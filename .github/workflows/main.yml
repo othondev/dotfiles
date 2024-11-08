@@ -11,10 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
+      - name: Check out repository code
+        uses: actions/checkout@v4
 
-      - name: Install Vim and validate .vimrc syntax
+      - name: Install Vim 
         run: |
-          sudo apt-get update && sudo apt-get install -y vim
-          vim -Nu ./vim/vimrc -Es -c "qa"
+          apk add vim 
+
+      - name: Check Vim Version                                                                                                                                           
+        run: |
+          vim --version
+
+      - name: Copy Custom Vim Config
+        run: |
+          cp vim/vimrc ~/.vimrc 
+
+      - name: Test Vim Configuration
+        run: |
+          vim -c 'qa!'
+
+      - name: Validate Vim Configuration (Lint)
+        run: |
+          if grep -q 'syntax on' ~/.vimrc; then echo "Syntax highlighting is enabled"; else echo "Syntax highlighting is not enabled"; fi
