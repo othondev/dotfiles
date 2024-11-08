@@ -24,7 +24,7 @@ jobs:
 
       - name: Copy Custom Vim Config
         run: |
-          cp $PWD/vim ~/.vim
+          cp -R vim/ ~/.vim/
 
       - name: Test Vim Configuration
         run: |
