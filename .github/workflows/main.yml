@@ -16,7 +16,7 @@ jobs:
 
       - name: Install Vim 
         run: |
-          apk add vim 
+          apt-get install vim 
 
       - name: Check Vim Version                                                                                                                                           
         run: |
