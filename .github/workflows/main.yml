@@ -22,6 +22,9 @@ jobs:
         run: |
           vim --version
 
+      - name: List current directory contents
+        run: ls -R
+
       - name: Copy Custom Vim Config
         run: |
           cp -R vim/ ~/.vim/
