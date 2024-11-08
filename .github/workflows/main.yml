@@ -17,4 +17,6 @@ jobs:
       - name: Validate .vimrc syntax
         run: |
           sudo apt-get update && sudo apt-get install -y vim 
+      - name: Validate .vimrc syntax
+        run: |
           vim -Nu vim/vimrc -Es -c "qa"
