@@ -14,7 +14,7 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      - name: Install Vim and validate vimrc syntax
+      - name: Install Vim and validate .vimrc syntax
         run: |
           sudo apt-get update && sudo apt-get install -y vim
-          vim -Nu vim/vimrc -Es -c "qa"
+          vim -Nu ./vim/vimrc -Es -c "qa"
