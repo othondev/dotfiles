@@ -14,24 +14,23 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      - name: Install Vim 
+      - name: Install Vim
         run: |
-          sudo apt-get install vim 
+          sudo apt-get update && sudo apt-get install -y vim
 
-      - name: Check Vim Version                                                                                                                                           
+      - name: Install Vim and set up .vim directory
         run: |
-          vim --version
-
-      - name: List current directory contents
-        run: ls -R
+          mkdir -p ~/.vim/autoload ~/.vim/plugged
+          curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
       - name: Copy Custom Vim Config
         run: |
           cp -R vim/ ~/.vim/
 
-      - name: Test Vim Configuration
+      - name: Install and Test Vim Configuration
         run: |
-          vim -c 'qa!'
+          vim +PlugInstall -c 'qa!'
 
       - name: Validate Vim Configuration (Lint)
         run: |

@@ -1,0 +1,159 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     General
+"                                                               Configuration
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set backupdir=/tmp//
+set cursorline
+set directory=/tmp//
+set expandtab
+set hidden
+set ignorecase
+set incsearch
+set nobackup
+set noerrorbells
+set noswapfile nowrap
+set number relativenumber
+set redrawtime=10000
+set shortmess+=c
+set smartindent smartcase
+set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
+set undodir=/tmp//
+set undofile
+set updatetime=300
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Auto
+"                                                                     commands
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+fun! TrimWhitespace()
+  let l:save = winsaveview()
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
+endfun
+
+autocmd BufRead,BufNewFile * if getline(1) =~ '^#!.*\b\(bash\|sh\)\>' | set filetype=sh | endif
+
+autocmd BufWritePre * :call TrimWhitespace()
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd FileType * syntax sync fromstart
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Plugins
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'mbbill/undotree'
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-dispatch'
+Plug 'Raimondi/delimitMate'
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Plugins
+"                                                               Configuration
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+let NERDTreeQuitOnOpen=1
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:netrw_banner = 0
+let g:netrw_browse_split = 2
+let g:netrw_winsize = 25
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Runners
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd FileType javascript let b:dispatch = 'node %'
+autocmd FileType typescript let b:dispatch = 'bun %'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Mappings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = " "
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gT <Plug>(coc-type-definition)
+nmap <silent> gI <Plug>(coc-implementation)
+nnoremap <Leader>pf :Files<CR>
+nmap <silent> <C-P> :GFiles <CR>
+nnoremap <leader>Y "+Y
+nnoremap <leader>af :CocFix <CR>
+nnoremap <leader>ap :Prettier <CR>
+nnoremap <leader>gl :GcLog <CR>
+nnoremap <leader>g :G <CR>
+nnoremap <leader>gh :diffget //3<CR>
+nnoremap <leader>gu :diffget //2<CR>
+nnoremap <leader>n :NERDTreeToggle <CR>
+nnoremap <leader>u :UndotreeShow <CR>
+nnoremap <leader>y "+y
+nnoremap <leader>/ :Lines <CR>
+nnoremap <silent> <Leader>+ :vertical resize +5<CR>
+nnoremap <silent> <Leader>- :vertical resize -5<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-c> <ESC>
+nnoremap <leader>x :bd<CR>
+nnoremap <F5> :w<CR>:Dispatch<CR>
+inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
+nnoremap <leader>e :History<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Snippet
+"                                                                       Codes
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F2> oconsole.log()<ESC>F(a
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                   Appearance
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+set background=dark
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:airline#extensions#tabline#buffers_label = 'B'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#tabs_label = 'T'
+let g:airline#extensions#branch#format = 2
+let g:airline_section_z = airline#section#create(['windowswap'])
+let g:airline_theme='onedark'
+colorscheme onedark
+
+
