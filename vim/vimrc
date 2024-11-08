@@ -102,7 +102,7 @@ nnoremap <leader>af :CocFix <CR>
 nnoremap <leader>ap :Prettier <CR>
 nnoremap <leader>gl :GcLog <CR>
 nnoremap <leader>g :G <CR>
-nnoremap <leader>c :e $MYVIMRC<CR>
+nnoremap <leader>c :tabnew $MYVIMRC<CR>
 nnoremap <leader>gh :diffget //3<CR>
 nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>n :NERDTreeToggle <CR>
@@ -112,7 +112,6 @@ nnoremap <leader>/ :Lines <CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 inoremap <C-c> <ESC>
-inoremap :w :w
 nnoremap <leader>x :bd<CR>
 nnoremap <F5> :w<CR>:Dispatch<CR>
 inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
