@@ -16,7 +16,7 @@ jobs:
 
       - name: Install Vim 
         run: |
-          apt-get install vim 
+          sudo apt-get install vim 
 
       - name: Check Vim Version                                                                                                                                           
         run: |
