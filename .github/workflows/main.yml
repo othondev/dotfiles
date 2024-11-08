@@ -1,22 +1,20 @@
-name: CI                                                                                                                                                                  
+name: CI
 
 on:
   push:
     branches:
-    - '*'
+      - '*'
 
 jobs:
   test:
-    name: test dotfiles
+    name: Test dotfiles
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      - name: Validate .vimrc syntax
+      - name: Install Vim and validate vimrc syntax
         run: |
-          sudo apt-get update && sudo apt-get install -y vim 
-      - name: Validate .vimrc syntax
-        run: |
+          sudo apt-get update && sudo apt-get install -y vim
           vim -Nu vim/vimrc -Es -c "qa"
