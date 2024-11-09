@@ -27,15 +27,6 @@ set updatetime=300
 "                                                                     commands
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-fun! TrimWhitespace()
-  let l:save = winsaveview()
-  keeppatterns %s/\s\+$//e
-  call winrestview(l:save)
-endfun
-
-autocmd BufRead,BufNewFile * if getline(1) =~ '^#!.*\b\(bash\|sh\)\>' | set filetype=sh | endif
-
-autocmd BufWritePre * :call TrimWhitespace()
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType * syntax sync fromstart
 
@@ -54,7 +45,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
-Plug 'joshdick/onedark.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
@@ -69,7 +59,6 @@ call plug#end()
 "                                                               Configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 let NERDTreeQuitOnOpen=1
 let g:ctrlp_use_caching = 0
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -83,6 +72,7 @@ let g:netrw_winsize = 25
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType javascript let b:dispatch = 'node %'
 autocmd FileType typescript let b:dispatch = 'node %'
+autocmd FileType sql let b:dispatch = 'echo oh'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Mappings
@@ -91,20 +81,17 @@ autocmd FileType typescript let b:dispatch = 'node %'
 let mapleader = " "
 nmap <silent> [[ <Plug>(coc-diagnostic-prev)
 nmap <silent> ]] <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gD <Plug>(coc-definition)
+nmap <silent> gR <Plug>(coc-references)
 nmap <silent> gT <Plug>(coc-type-definition)
 nmap <silent> gI <Plug>(coc-implementation)
 nnoremap <Leader>pf :Files<CR>
 nmap <silent> <C-P> :GFiles <CR>
 nnoremap <leader>Y "+Y
-nnoremap <leader>af :CocFix <CR>
-nnoremap <leader>ap :Prettier <CR>
-nnoremap <leader>gl :GcLog <CR>
+nnoremap <leader>a :CocCommand <CR>
+nnoremap <leader>l :GcLog <CR>
 nnoremap <leader>g :G <CR>
 nnoremap <leader>c :tabnew $MYVIMRC<CR>
-nnoremap <leader>gh :diffget //3<CR>
-nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>n :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeShow <CR>
 nnoremap <leader>y "+y
