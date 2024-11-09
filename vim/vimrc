@@ -21,6 +21,7 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set undodir=/tmp//
 set undofile
 set updatetime=300
+set laststatus=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Auto
@@ -79,30 +80,30 @@ autocmd FileType sql let b:dispatch = 'echo oh'
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
+inoremap <C-c> <ESC>
+inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
+nmap <silent> <C-P> :GFiles <CR>
 nmap <silent> [[ <Plug>(coc-diagnostic-prev)
 nmap <silent> ]] <Plug>(coc-diagnostic-next)
 nmap <silent> gD <Plug>(coc-definition)
+nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gR <Plug>(coc-references)
 nmap <silent> gT <Plug>(coc-type-definition)
-nmap <silent> gI <Plug>(coc-implementation)
-nnoremap <Leader>pf :Files<CR>
-nmap <silent> <C-P> :GFiles <CR>
+nnoremap <F5> :w<CR>:Dispatch<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <leader>/ :Lines <CR>
 nnoremap <leader>Y "+Y
 nnoremap <leader>a :CocCommand <CR>
-nnoremap <leader>l :GcLog <CR>
-nnoremap <leader>g :G <CR>
 nnoremap <leader>c :tabnew $MYVIMRC<CR>
+nnoremap <leader>e :History<CR>
+nnoremap <leader>g :G <CR>
+nnoremap <leader>l :tabnew \| :GcLog <CR>
 nnoremap <leader>n :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeShow <CR>
-nnoremap <leader>y "+y
-nnoremap <leader>/ :Lines <CR>
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
-inoremap <C-c> <ESC>
 nnoremap <leader>x :bd<CR>
-nnoremap <F5> :w<CR>:Dispatch<CR>
-inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
-nnoremap <leader>e :History<CR>
+nnoremap <leader>y "+y
+nnoremap <left> :cp<CR>
+nnoremap <right> :cn<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Snippet
