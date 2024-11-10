@@ -6,11 +6,13 @@ if [ -z $1 ]; then
   echo "missing path" || exit 1;
 fi
 
-days_ago=$(( ( $(date +%s) - $(git log -1 --format=%ct -- "$file" 2>/dev/null || stat -c %Y "$file" ) ) / 86400 ))
+seconds_ago=$(git log -1 --format=%ct -- "$file" 2>/dev/null || stat -c %Y "$file")
 
-if [ -z $days_ago ]; then
+if [ -z $seconds_ago ]; then
   exit 0
 fi
+
+days_ago=$(( ( $(date +%s) - $seconds_ago ) / 86400 ))
 
 if [ "$days_ago" -eq 0 ]; then
     echo "today"

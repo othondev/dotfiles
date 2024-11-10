@@ -80,7 +80,7 @@ autocmd FileType sql let b:dispatch = 'echo oh'
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let git_modified_status = ""
-autocmd BufReadPost,BufNewFile *.* let g:git_modified_status = substitute(system('bash ~/.vim/scripts/file-days-ago.sh' . ' ' . shellescape(expand('%:p'))), '\n', '', 'g')
+autocmd BufReadPost,BufNewFile * let g:git_modified_status = substitute(system('bash ~/.vim/scripts/file-days-ago.sh' . ' ' . shellescape(expand('%:p'))), '\n', '', 'g')
 
 set statusline=%f%=%{g:git_modified_status}
 
