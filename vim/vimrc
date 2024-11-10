@@ -76,6 +76,15 @@ autocmd FileType typescript let b:dispatch = 'node %'
 autocmd FileType sql let b:dispatch = 'echo oh'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                     Functions
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let git_modified_status = ""
+autocmd BufReadPost,BufNewFile * let g:git_modified_status = substitute(system('bash ~/.vim/scripts/file-days-ago.sh' . ' ' . shellescape(expand('%:p'))), '\n', '', 'g')
+
+set statusline=%f%=%{g:git_modified_status}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                     Mappings
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,6 +109,7 @@ nnoremap <leader>g :G <CR>
 nnoremap <leader>l :tabnew \| :GcLog <CR>
 nnoremap <leader>n :NERDTreeToggle <CR>
 nnoremap <leader>u :UndotreeShow <CR>
+nnoremap <leader>b :Git blame <CR>
 nnoremap <leader>x :bd<CR>
 nnoremap <leader>y "+y
 nnoremap <left> :cp<CR>
