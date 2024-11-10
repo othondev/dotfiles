@@ -3,10 +3,14 @@
 file=$1
 
 if [ -z $1 ]; then
-  echo "ERROR" || exit 1;
+  echo "missing path" || exit 1;
 fi
 
 days_ago=$(( ( $(date +%s) - $(git log -1 --format=%ct -- "$file" 2>/dev/null || stat -c %Y "$file" ) ) / 86400 ))
+
+if [ -z $days_ago ]; then
+  exit 0
+fi
 
 if [ "$days_ago" -eq 0 ]; then
     echo "today"
