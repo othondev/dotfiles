@@ -1,6 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     General
-"                                                               Configuration
+"                                                                        General
+"                                                                  Configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set backupdir=/tmp//
@@ -22,17 +22,22 @@ set undodir=/tmp//
 set undofile
 set updatetime=300
 set laststatus=2
+set hlsearch
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Auto
-"                                                                     commands
+"                                                                           Auto
+"                                                                       commands
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd FileType * syntax sync fromstart
+augroup auto_source_vimrc
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Plugins
+"                                                                        Plugins
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -56,8 +61,8 @@ Plug 'tpope/vim-unimpaired'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Plugins
-"                                                               Configuration
+"                                                                        Plugins
+"                                                                  Configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let NERDTreeQuitOnOpen=1
@@ -68,7 +73,7 @@ let g:netrw_browse_split = 2
 let g:netrw_winsize = 25
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Runners
+"                                                                        Runners
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType javascript let b:dispatch = 'node %'
@@ -85,7 +90,7 @@ autocmd BufReadPost,BufNewFile * let b:git_modified_status = substitute(system('
 set statusline+=%f:%l%=%{b:git_modified_status}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Mappings
+"                                                                       Mappings
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
@@ -98,6 +103,7 @@ nmap <silent> gD <Plug>(coc-definition)
 nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gR <Plug>(coc-references)
 nmap <silent> gT <Plug>(coc-type-definition)
+nmap <ESC> <ESC>:nohlsearch<cr>
 nnoremap <F5> :w<CR>:Dispatch<CR>
 nnoremap <Leader>f :Files<CR>
 nnoremap <leader>/ :Lines <CR>
@@ -114,16 +120,17 @@ nnoremap <leader>x :bd<CR>
 nnoremap <leader>y "+y
 nnoremap <left> :cp<CR>
 nnoremap <right> :cn<CR>
+nnoremap - :Hexplore<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Snippet
-"                                                                       Codes
+"                                                                        Snippet
+"                                                                          Codes
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F2> oconsole.log()<ESC>F(a
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                   Appearance
+"                                                                     Appearance
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
