@@ -39,16 +39,10 @@ set scrolloff=8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap <C-c> <ESC>
 let mapleader = " "
-nnoremap <C-H> <C-W>h
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
 nnoremap <leader>Y "+Y
 nnoremap <leader>P "+P
-nnoremap <leader>gh :diffget //3<CR>
-nnoremap <leader>gu :diffget //2<CR>
 nnoremap <leader>x :bd <CR>
-nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
+noremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
 noremap <leader>y "+y
 nnoremap <silent> <Leader>+ :vertical resize +30<CR>
 nnoremap <silent> <Leader>- :vertical resize -30<CR>

@@ -11,10 +11,8 @@ set hidden
 set ignorecase
 set incsearch
 set nobackup
-set noerrorbells
 set noswapfile nowrap
 set relativenumber
-set redrawtime=10000
 set shortmess+=c
 set smartindent smartcase
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
@@ -87,23 +85,23 @@ autocmd FileType sql let b:dispatch = 'echo oh'
 let b:git_modified_status = ""
 autocmd BufReadPost,BufNewFile * let b:git_modified_status = substitute(system('bash ~/.vim/scripts/file-days-ago.sh' . ' ' . shellescape(expand('%:p'))), '\n', '', 'g')
 
-set statusline+=%f:%l%=%{b:git_modified_status}
+set statusline=%f:%l%=%{b:git_modified_status}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                       Mappings
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
-inoremap <C-c> <ESC>
 inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
 nmap <silent> <C-P> :GFiles <CR>
+nmap <silent> <C-f> :Rg <CR>
 nmap <silent> [[ <Plug>(coc-diagnostic-prev)
 nmap <silent> ]] <Plug>(coc-diagnostic-next)
 nmap <silent> gD <Plug>(coc-definition)
 nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gR <Plug>(coc-references)
 nmap <silent> gT <Plug>(coc-type-definition)
-nmap <ESC> <ESC>:nohlsearch<cr>
+nnoremap <ESC> <ESC>:nohlsearch<cr>
 nnoremap <F5> :w<CR>:Dispatch<CR>
 nnoremap <Leader>f :Files<CR>
 nnoremap <leader>/ :Lines <CR>
@@ -133,4 +131,3 @@ nnoremap <F2> oconsole.log()<ESC>F(a
 "                                                                     Appearance
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
