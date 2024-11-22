@@ -56,6 +56,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'dyng/ctrlsf.vim'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,6 +70,10 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:netrw_banner = 0
 let g:netrw_browse_split = 2
 let g:netrw_winsize = 25
+
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                        Runners
@@ -93,15 +98,15 @@ set statusline=%f:%l%=%{b:git_modified_status}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " "
 inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
-nmap <silent> <C-P> :GFiles <CR>
-nmap <silent> <C-f> :Rg <CR>
-nmap <silent> [[ <Plug>(coc-diagnostic-prev)
-nmap <silent> ]] <Plug>(coc-diagnostic-next)
-nmap <silent> gD <Plug>(coc-definition)
-nmap <silent> gI <Plug>(coc-implementation)
-nmap <silent> gR <Plug>(coc-references)
-nmap <silent> gT <Plug>(coc-type-definition)
-nnoremap <ESC> <ESC>:nohlsearch<cr>
+nmap     <silent> <C-P> :GFiles <CR>
+nmap     <silent> <C-f> :Rg <CR>
+nmap     <silent> [[ <Plug>(coc-diagnostic-prev)
+nmap     <silent> ]] <Plug>(coc-diagnostic-next)
+nmap     <silent> gD <Plug>(coc-definition)
+nmap     <silent> gI <Plug>(coc-implementation)
+nmap     <silent> gR <Plug>(coc-references)
+nmap     <silent> gT <Plug>(coc-type-definition)
+nnoremap <silent> <ESC> <ESC>:nohlsearch<cr>
 nnoremap <F5> :w<CR>:Dispatch<CR>
 nnoremap <Leader>f :Files<CR>
 nnoremap <leader>/ :Lines <CR>
@@ -119,6 +124,8 @@ nnoremap <leader>y "+y
 nnoremap <left> :cp<CR>
 nnoremap <right> :cn<CR>
 nnoremap - :Hexplore<cr>
+nnoremap <leader>* <PLug>CtrlSFPrompt<C-R><C-W>
+vmap     <leader>* <Plug>CtrlSFVwordPath<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                        Snippet
