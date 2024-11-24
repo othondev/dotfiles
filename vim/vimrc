@@ -170,7 +170,7 @@ let b:git_modified_status = ""
 autocmd BufReadPost,BufNewFile,BufWritePost * let b:git_modified_status = system('bash ~/.vim/scripts/file-days-ago.sh ' . shellescape(expand('%:p')))
 
 let b:author = ""
-autocmd CursorMoved,BufReadPost * let b:author = system('bash ~/.vim/scripts/line-days-ago-author.sh ' . shellescape(expand('%') . ':' . line('.')))
+autocmd CursorHold,BufReadPost * let b:author = system('bash ~/.vim/scripts/line-days-ago-author.sh ' . shellescape(expand('%') . ':' . line('.')))
 
 set statusline=%f:%l\ %{b:author}%=%{b:git_modified_status}
 
