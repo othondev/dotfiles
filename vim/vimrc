@@ -3,24 +3,41 @@
 "                                                                  Configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set autoread
 set backupdir=/tmp//
 set cursorline
 set directory=/tmp//
 set expandtab
 set hidden
+set hlsearch
 set ignorecase
 set incsearch
 set nobackup
+set noerrorbells
 set noswapfile nowrap
+set redrawtime=10000
 set relativenumber
+set scrolloff=8
 set shortmess+=c
 set smartindent smartcase
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set undodir=/tmp//
 set undofile
 set updatetime=300
-set laststatus=2
-set hlsearch
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                        General
+"                                                                       Mappings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = " "
+nnoremap <silent> <ESC> <ESC>:nohlsearch<cr>
+nnoremap <leader>c :tabnew $MYVIMRC<CR>
+nnoremap <silent> <leader>x :bd<CR>
+nnoremap <left> :cp<CR>
+nnoremap <right> :cn<CR>
+nnoremap - :Hexplore<cr>
+nnoremap <silent> <leader>X :w <bar> %bd <bar> e# <bar> bd# <CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                           Auto
@@ -43,7 +60,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 call plug#begin('~/.vim/plugged')
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
@@ -64,68 +80,74 @@ call plug#end()
 "                                                                  Configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeQuitOnOpen=1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:netrw_banner = 0
-let g:netrw_browse_split = 2
-let g:netrw_winsize = 25
+function LoadCustomConfig(pluginName)
 
-let g:ctrlsf_auto_focus = {
-    \ "at": "start"
-    \ }
+  if a:pluginName == 'coc'
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+    function! ShowDocumentation()
+      if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+      else
+        call feedkeys('K', 'in')
+      endif
+    endfunction
+    nmap     <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap     <silent> ]g <Plug>(coc-diagnostic-next)
+    nmap     <silent> gD <Plug>(coc-definition)
+    nmap     <silent> gR <Plug>(coc-references)
+    nmap     <silent> gI <Plug>(coc-implementation)
+    nmap     <leader>a   :CocCommand<CR>
+    nnoremap <silent>K   :call ShowDocumentation()<CR>
+    xmap     <leader>a   <Plug>(coc-codeaction-selected)
+  endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                        Runners
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType javascript let b:dispatch = 'node %'
-autocmd FileType typescript let b:dispatch = 'node %'
-autocmd FileType sql let b:dispatch = 'echo oh'
+  if a:pluginName == 'nerdtree'
+    nnoremap <leader>n :NERDTreeFind <CR>
+  endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                     Statusline
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let b:git_modified_status = ""
-autocmd BufReadPost,BufNewFile * let b:git_modified_status = substitute(system('bash ~/.vim/scripts/file-days-ago.sh' . ' ' . shellescape(expand('%:p'))), '\n', '', 'g')
+  if a:pluginName == 'undotree'
+    nnoremap <leader>u :UndotreeShow <CR>
+  endif
 
-set statusline=%f:%l%=%{b:git_modified_status}
+  if a:pluginName == 'vim-dispatch'
+    autocmd FileType javascript let b:dispatch = 'node %'
+    autocmd FileType typescript let b:dispatch = 'node %'
+    nnoremap <F5> :w<CR>:Dispatch<CR>
+    inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
+  endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                       Mappings
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = " "
-inoremap <F5> <ESC>:w<CR>:Dispatch<CR>
-nmap     <silent> <C-P> :GFiles <CR>
-nmap     <silent> <C-f> :Rg <CR>
-nmap     <silent> [[ <Plug>(coc-diagnostic-prev)
-nmap     <silent> ]] <Plug>(coc-diagnostic-next)
-nmap     <silent> gD <Plug>(coc-definition)
-nmap     <silent> gI <Plug>(coc-implementation)
-nmap     <silent> gR <Plug>(coc-references)
-nmap     <silent> gT <Plug>(coc-type-definition)
-nnoremap <silent> <ESC> <ESC>:nohlsearch<cr>
-nnoremap <F5> :w<CR>:Dispatch<CR>
-nnoremap <Leader>f :Files<CR>
-nnoremap <leader>/ :Lines <CR>
-nnoremap <leader>Y "+Y
-nnoremap <leader>a :CocCommand <CR>
-nnoremap <leader>c :tabnew $MYVIMRC<CR>
-nnoremap <leader>e :History<CR>
-nnoremap <leader>g :G <CR>
-nnoremap <leader>l :tabnew \| :GcLog <CR>
-nnoremap <leader>n :NERDTreeToggle <CR>
-nnoremap <leader>u :UndotreeShow <CR>
-nnoremap <leader>b :Git blame <CR>
-nnoremap <leader>x :bd<CR>
-nnoremap <leader>y "+y
-nnoremap <left> :cp<CR>
-nnoremap <right> :cn<CR>
-nnoremap - :Hexplore<cr>
-nnoremap <leader>* <PLug>CtrlSFPrompt<C-R><C-W>
-vmap     <leader>* <Plug>CtrlSFVwordPath<CR>
+  if a:pluginName == 'vim-fugitive'
+    nnoremap <leader>g :G <CR>
+    nnoremap <leader>b :Git blame <CR>
+    nnoremap <leader>l :tabnew \| :GcLog <CR>
+  endif
+
+  if a:pluginName == 'ctrlsf'
+    nnoremap <leader>* <PLug>CtrlSFPrompt<C-R><C-W>
+    nnoremap <leader>8 :CtrlSFOpen<cr>
+    vmap     <leader>* <Plug>CtrlSFVwordPath<CR>
+  endif
+
+  if a:pluginName == 'blamer'
+    let g:blamer_enabled = 1
+    let g:blamer_delay = 1000
+    highlight Blamer guifg=lightgrey
+  endif
+
+  if a:pluginName == 'fzf'
+    nmap     <silent> <C-P> :GFiles <CR>
+    nmap     <silent> <C-f> :Rg <CR>
+    nnoremap <Leader>f :Files<CR>
+    nnoremap <leader>/ :Lines <CR>
+    nnoremap <leader>e :History<CR>
+  endif
+endfunction
+
+for [name, spec] in items(g:plugs)
+  let pluginName = split(name, '\.')[0]
+  call LoadCustomConfig(pluginName)
+endfor
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                        Snippet
@@ -138,3 +160,4 @@ nnoremap <F2> oconsole.log()<ESC>F(a
 "                                                                     Appearance
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=0
