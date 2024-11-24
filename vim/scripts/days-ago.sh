@@ -1,12 +1,17 @@
 #!/bin/bash
 
+if [ -z $1 ]; then
+  printf "no file date" 
+  exit 1
+fi
+
 days_ago=$(( ( $(date +%s) - $1 ) / 86400 ))
 
 if [ "$days_ago" -eq 0 ]; then
-  echo "today"
+  printf "today"
 
 elif [ "$days_ago" -eq 1 ]; then
-  echo "yesterday"
+  printf "yesterday"
 
 else
   years=$((days_ago / 365))
@@ -25,5 +30,5 @@ else
     result="${result}${days}d"
   fi
 
-  echo "$result"
+  printf "$result"
 fi
